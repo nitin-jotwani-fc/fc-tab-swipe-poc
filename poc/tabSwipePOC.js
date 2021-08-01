@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Text, View } from "react-native";
 import { Modalize } from "react-native-modalize";
 import MiniSC from "./mini-sc";
-import BottomSheetContent from "./bottom-sheet-content";
+import BottomSheetContent from "./bottom-sheet-content2";
 import { useNavigationPanel } from "./useNavigationPanel";
 import PagerTitleView from "./pager-title-view";
 
@@ -21,9 +21,10 @@ export default function TabSwipePOC() {
             <PagerTitleView activePageIndex={navigationPanel.activePage} />
           </View>
         }
-      >
-        <BottomSheetContent navigationPanel={navigationPanel} />
-      </Modalize>
+        customRenderer={
+          <BottomSheetContent navigationPanel={navigationPanel} />
+        }
+      ></Modalize>
     </>
   );
 }

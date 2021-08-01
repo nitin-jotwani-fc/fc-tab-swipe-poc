@@ -20,30 +20,31 @@ export const sectionData = [
 export default function BottomSheetContent({ navigationPanel }) {
   // const { ref, ...navigationPanel } = useNavigationPanel();
   return (
-    <View style={styles.container}>
-      <SectionList
-        sections={sectionData}
-        stickySectionHeadersEnabled={false}
-        keyExtractor={(item, index) => item + index}
-        renderItem={() => (
-          <AnimatedPagerView
-            style={styles.pagerView}
-            initialPage={1}
-            showPageIndicator={true}
-            onPageSelected={navigationPanel.onPageSelected}
-          >
-            {pagerTitleData.map((item, index) => (
-              <View key={item.id}>
-                <Text>{item.title}</Text>
-              </View>
-            ))}
-          </AnimatedPagerView>
-        )}
-        // renderSectionHeader={() => (
-        //   <PagerTitleView activePageIndex={navigationPanel.activePage} />
-        // )}
-      />
-    </View>
+    <AnimatedPagerView
+      style={styles.pagerView}
+      initialPage={1}
+      showPageIndicator={true}
+      onPageSelected={navigationPanel.onPageSelected}
+    >
+      {pagerTitleData.map((item, index) => (
+        <SectionList
+          sections={sectionData}
+          renderItem={() => (
+            <View
+              key={item.id}
+              style={[
+                styles.viewStyle,
+                {
+                  backgroundColor: index % 2 === 0 ? "cyan" : "red",
+                },
+              ]}
+            >
+              <Text>{item.title}</Text>
+            </View>
+          )}
+        />
+      ))}
+    </AnimatedPagerView>
   );
 }
 
@@ -53,7 +54,9 @@ const styles = StyleSheet.create({
   },
   pagerView: {
     flex: 1,
+    backgroundColor: "green",
+  },
+  viewStyle: {
     height: 1300,
-    backgroundColor: "cyan",
   },
 });
